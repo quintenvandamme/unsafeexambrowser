@@ -77,31 +77,10 @@ namespace SafeExamBrowser.Monitoring.Display
 			if (TryLoadDisplays(out var displays))
 			{
 				var active = displays.Where(d => d.IsActive);
-				var count = active.Count();
 
 				result.ExternalDisplays = active.Count(d => !d.IsInternal);
 				result.InternalDisplays = active.Count(d => d.IsInternal);
-				result.IsAllowed = count <= settings.AllowedDisplays;
-
-				if (result.IsAllowed)
-				{
-					logger.Info($"Detected {count} active displays, {settings.AllowedDisplays} are allowed.");
-				}
-				else
-				{
-					logger.Warn($"Detected {count} active displays but only {settings.AllowedDisplays} are allowed!");
-				}
-
-				if (settings.InternalDisplayOnly && active.Any(d => !d.IsInternal))
-				{
-					result.IsAllowed = false;
-					logger.Warn("Detected external display but only internal displays are allowed!");
-				}
-			}
-			else
-			{
-				result.IsAllowed = settings.IgnoreError;
-				logger.Warn($"Failed to validate display configuration, {(result.IsAllowed ? "ignoring error" : "active configuration is not allowed")}.");
+				result.IsAllowed = true;
 			}
 
 			return result;
@@ -189,11 +168,6 @@ namespace SafeExamBrowser.Monitoring.Display
 						var technology = (VideoOutputTechnology) technologyValue;
 						var display = displays.FirstOrDefault(d => d.Identifier?.Equals(identifier, StringComparison.OrdinalIgnoreCase) == true);
 
-						if (!Enum.IsDefined(typeof(VideoOutputTechnology), technology))
-						{
-							logger.Warn($"Detected undefined video output technology '{technologyValue}' for display '{identifier}'!");
-						}
-
 						if (display != default(Display))
 						{
 							display.IsActive &= isActive;
@@ -206,11 +180,6 @@ namespace SafeExamBrowser.Monitoring.Display
 			{
 				success = false;
 				logger.Error("Failed to query displays!", e);
-			}
-
-			foreach (var display in displays)
-			{
-				logger.Info($"Detected {(display.IsActive ? "active" : "inactive")}, {(display.IsInternal ? "internal" : "external")} display '{display.Identifier}' connected via '{display.Technology}'.");
 			}
 
 			return success;

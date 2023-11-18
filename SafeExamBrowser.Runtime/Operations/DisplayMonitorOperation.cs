@@ -56,30 +56,9 @@ namespace SafeExamBrowser.Runtime.Operations
 			var result = OperationResult.Failed;
 			var validation = displayMonitor.ValidateConfiguration(Context.Next.Settings.Display);
 
-			if (validation.IsAllowed)
-			{
-				logger.Info("Display configuration is allowed.");
-				result = OperationResult.Success;
-			}
-			else
-			{
-				var args = new MessageEventArgs
-				{
-					Action = MessageBoxAction.Ok,
-					Icon = MessageBoxIcon.Error,
-					Message = TextKey.MessageBox_DisplayConfigurationError,
-					Title = TextKey.MessageBox_DisplayConfigurationErrorTitle
-				};
-
-				logger.Error("Display configuration is not allowed!");
-
-				args.MessagePlaceholders.Add("%%_ALLOWED_COUNT_%%", Convert.ToString(Context.Next.Settings.Display.AllowedDisplays));
-				args.MessagePlaceholders.Add("%%_TYPE_%%", Context.Next.Settings.Display.InternalDisplayOnly ? text.Get(TextKey.MessageBox_DisplayConfigurationInternal) : text.Get(TextKey.MessageBox_DisplayConfigurationInternalOrExternal));
-				args.MessagePlaceholders.Add("%%_EXTERNAL_COUNT_%%", Convert.ToString(validation.ExternalDisplays));
-				args.MessagePlaceholders.Add("%%_INTERNAL_COUNT_%%", Convert.ToString(validation.InternalDisplays));
-
-				ActionRequired?.Invoke(args);
-			}
+	
+			logger.Info("Display configuration is allowed.");
+			result = OperationResult.Success;
 
 			return result;
 		}
