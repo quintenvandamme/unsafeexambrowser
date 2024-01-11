@@ -379,6 +379,7 @@ namespace SebWindowsConfig
 		public const String KeyAllowWindowsUpdate = "enableWindowsUpdate";
 		public const String KeyVersionRestrictions = "sebAllowedVersions";
 		public const String KeyClipboardPolicy = "clipboardPolicy";
+		public const String KeyDisableSessionChangeLockScreen = "disableSessionChangeLockScreen";
 
 		// Group "macOS specific settings"
 		public const String KeyMinMacOSVersion = "minMacOSVersion";
@@ -1016,6 +1017,7 @@ namespace SebWindowsConfig
 			SEBSettings.settingsDefault.Add(SEBSettings.KeyAllowChromeNotifications, false);
 			SEBSettings.settingsDefault.Add(SEBSettings.KeyAllowWindowsUpdate, false);
 			SEBSettings.settingsDefault.Add(SEBSettings.KeyClipboardPolicy, 2);
+			SEBSettings.settingsDefault.Add(SEBSettings.KeyDisableSessionChangeLockScreen, false);
 
 			// Default selected index and string in combo box for minMacOSVersion 
 			SEBSettings.intArrayDefault[SEBSettings.ValMinMacOSVersion] = 4;
