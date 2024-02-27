@@ -337,6 +337,11 @@ namespace SafeExamBrowser.Browser
 			cefSettings.PersistSessionCookies = !settings.DeleteCookiesOnStartup || !settings.DeleteCookiesOnShutdown;
 			cefSettings.UserAgent = InitializeUserAgent();
 
+			if (!settings.AllowPageZoom)
+			{
+				cefSettings.CefCommandLineArgs.Add("disable-pinch");
+			}
+
 			if (!settings.AllowPdfReader)
 			{
 				cefSettings.CefCommandLineArgs.Add("disable-pdf-extension");
