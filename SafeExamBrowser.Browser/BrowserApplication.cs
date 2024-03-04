@@ -40,6 +40,7 @@ namespace SafeExamBrowser.Browser
 		private int windowIdCounter = default;
 
 		private readonly AppConfig appConfig;
+		private readonly Clipboard clipboard;
 		private readonly IFileSystemDialog fileSystemDialog;
 		private readonly IHashAlgorithm hashAlgorithm;
 		private readonly IKeyGenerator keyGenerator;
@@ -78,6 +79,7 @@ namespace SafeExamBrowser.Browser
 			IUserInterfaceFactory uiFactory)
 		{
 			this.appConfig = appConfig;
+			this.clipboard = new Clipboard(logger.CloneFor(nameof(Clipboard)), settings);
 			this.fileSystemDialog = fileSystemDialog;
 			this.hashAlgorithm = hashAlgorithm;
 			this.keyGenerator = keyGenerator;
@@ -192,6 +194,7 @@ namespace SafeExamBrowser.Browser
 			var windowLogger = logger.CloneFor($"Browser Window #{id}");
 			var window = new BrowserWindow(
 				appConfig,
+				clipboard,
 				fileSystemDialog,
 				hashAlgorithm,
 				id,
