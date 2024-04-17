@@ -76,16 +76,15 @@ namespace SafeExamBrowser.Monitoring.Display
 
 				result.ExternalDisplays = active.Count(d => !d.IsInternal);
 				result.InternalDisplays = active.Count(d => d.IsInternal);
-				result.IsAllowed = true;
 			}
+
+			result.IsAllowed = true;
 
 			return result;
 		}
 
 		private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
 		{
-			logger.Info("Display change detected!");
-			Task.Run(() => DisplayChanged?.Invoke());
 		}
 
 		private void InitializeWorkingArea(int taskbarHeight)
