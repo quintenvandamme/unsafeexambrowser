@@ -19,11 +19,11 @@ namespace SafeExamBrowser.Settings.Monitoring
 		/// <summary>
 		/// Determines whether the user may use the middle mouse button.
 		/// </summary>
-		public bool AllowMiddleButton { get; set; }
+		public bool AllowMiddleButton = true;
 
 		/// <summary>
 		/// Determines whether the user may use the right mouse button.
 		/// </summary>
-		public bool AllowRightButton { get; set; }
+		public bool AllowRightButton = true;
 	}
 }

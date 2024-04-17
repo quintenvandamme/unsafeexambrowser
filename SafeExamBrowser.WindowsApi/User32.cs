@@ -18,7 +18,7 @@ namespace SafeExamBrowser.WindowsApi
 	/// <summary>
 	/// Provides access to the native Windows API exposed by <c>user32.dll</c>.
 	/// </summary>
-	internal static class User32
+	public static class User32
 	{
 		[DllImport("user32.dll", SetLastError = true)]
 		internal static extern IntPtr CallNextHookEx(IntPtr hhk, int nCode, IntPtr wParam, IntPtr lParam);
@@ -115,5 +115,39 @@ namespace SafeExamBrowser.WindowsApi
 
 		[DllImport("user32.dll", SetLastError = true)]
 		internal static extern bool UnhookWindowsHookEx(IntPtr hhk);
+
+
+		private const int SW_HIDE = 0;
+		private const int SW_SHOW = 5;
+
+		public static void HideTaskbar()
+		{
+			IntPtr taskbarHandle = FindWindow("Shell_TrayWnd", null);
+
+			if (taskbarHandle != IntPtr.Zero)
+			{
+				ShowWindow(taskbarHandle, SW_HIDE);
+				Console.WriteLine("Taskbar hidden.");
+			}
+			else
+			{
+				Console.WriteLine("Taskbar not found.");
+			}
+		}
+
+		public static void ShowTaskbar()
+		{
+			IntPtr taskbarHandle = FindWindow("Shell_TrayWnd", null);
+
+			if (taskbarHandle != IntPtr.Zero)
+			{
+				ShowWindow(taskbarHandle, SW_SHOW);
+				Console.WriteLine("Taskbar shown.");
+			}
+			else
+			{
+				Console.WriteLine("Taskbar not found.");
+			}
+		}
 	}
 }

@@ -130,7 +130,7 @@ namespace SafeExamBrowser.UserInterface.Desktop.Windows
 
 		public new void Show()
 		{
-			Dispatcher.Invoke(base.Show);
+			//Dispatcher.Invoke(base.Show);
 		}
 
 		private void InitializeRuntimeWindow()

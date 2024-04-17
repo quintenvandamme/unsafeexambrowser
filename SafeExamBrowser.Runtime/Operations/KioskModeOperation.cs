@@ -12,6 +12,7 @@ using SafeExamBrowser.I18n.Contracts;
 using SafeExamBrowser.Logging.Contracts;
 using SafeExamBrowser.Settings.Security;
 using SafeExamBrowser.WindowsApi.Contracts;
+using SafeExamBrowser.WindowsApi;
 
 namespace SafeExamBrowser.Runtime.Operations
 {
@@ -124,6 +125,7 @@ namespace SafeExamBrowser.Runtime.Operations
 
 		private void CreateCustomDesktop()
 		{
+			/*
 			originalDesktop = desktopFactory.GetCurrent();
 			logger.Info($"Current desktop is {originalDesktop}.");
 
@@ -135,7 +137,16 @@ namespace SafeExamBrowser.Runtime.Operations
 			logger.Info("Successfully activated custom desktop.");
 
 			desktopMonitor.Start(customDesktop);
-		}
+			*/
+
+			
+			originalDesktop = desktopFactory.GetCurrent();
+			logger.Info($"Current desktop is {originalDesktop}.");
+			processFactory.StartupDesktop = originalDesktop;
+			desktopMonitor.Start(originalDesktop);		
+			
+			User32.HideTaskbar();
+			}
 
 		private void CloseCustomDesktop()
 		{
@@ -161,6 +172,8 @@ namespace SafeExamBrowser.Runtime.Operations
 			{
 				logger.Warn($"No custom desktop found to close!");
 			}
+
+			User32.ShowTaskbar();
 		}
 
 		private void TerminateExplorerShell()

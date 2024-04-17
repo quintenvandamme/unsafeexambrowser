@@ -61,35 +61,10 @@ namespace SafeExamBrowser.Monitoring.Applications
 
 		public void Start()
 		{
-			timer.AutoReset = false;
-			timer.Elapsed += Timer_Elapsed;
-			timer.Start();
-			logger.Info("Started monitoring applications.");
-
-			captureHookId = nativeMethods.RegisterSystemCaptureStartEvent(SystemEvent_WindowChanged);
-			logger.Info($"Registered system capture start event with ID = {captureHookId}.");
-
-			foregroundHookId = nativeMethods.RegisterSystemForegroundEvent(SystemEvent_WindowChanged);
-			logger.Info($"Registered system foreground event with ID = {foregroundHookId}.");
 		}
 
 		public void Stop()
 		{
-			timer.Stop();
-			timer.Elapsed -= Timer_Elapsed;
-			logger.Info("Stopped monitoring applications.");
-
-			if (captureHookId.HasValue)
-			{
-				nativeMethods.DeregisterSystemEventHook(captureHookId.Value);
-				logger.Info($"Unregistered system capture start event with ID = {captureHookId}.");
-			}
-
-			if (foregroundHookId.HasValue)
-			{
-				nativeMethods.DeregisterSystemEventHook(foregroundHookId.Value);
-				logger.Info($"Unregistered system foreground event with ID = {foregroundHookId}.");
-			}
 		}
 
 		public bool TryTerminate(RunningApplication application)
@@ -116,10 +91,6 @@ namespace SafeExamBrowser.Monitoring.Applications
 
 				Task.Run(() =>
 				{
-					if (!IsAllowed(window) && !TryHide(window))
-					{
-						Close(window);
-					}
 				});
 			}
 		}
@@ -153,13 +124,11 @@ namespace SafeExamBrowser.Monitoring.Applications
 			foreach (var process in terminated)
 			{
 				logger.Debug($"Process {process} has been terminated.");
-				processes.Remove(process);
 			}
 
 			if (failed.Any())
 			{
 				logger.Warn($"Failed to terminate these blacklisted applications: {string.Join(", ", failed.Select(a => a.Name))}.");
-				TerminationFailed?.Invoke(failed);
 			}
 
 			timer.Start();
@@ -247,7 +216,7 @@ namespace SafeExamBrowser.Monitoring.Applications
 			isWebView &= process.Signature == "a4baabd12432ab9c7c297385260e95c3dae83bf2";
 #endif
 
-			return isClient || isRuntime || isWebView;
+			return true;
 		}
 
 		private void Close(Window window)
@@ -276,34 +245,6 @@ namespace SafeExamBrowser.Monitoring.Applications
 
 		private void InitializeBlacklist(ApplicationSettings settings, InitializationResult result)
 		{
-			foreach (var application in settings.Blacklist)
-			{
-				blacklist.Add(application);
-			}
-
-			logger.Debug($"Initialized blacklist with {blacklist.Count} applications{(blacklist.Any() ? $": {string.Join(", ", blacklist.Select(a => a.ExecutableName))}" : ".")}");
-
-			foreach (var process in processes)
-			{
-				foreach (var application in blacklist)
-				{
-					var isBlacklisted = BelongsToApplication(process, application);
-
-					if (isBlacklisted)
-					{
-						if (!application.AutoTerminate)
-						{
-							AddForTermination(application.ExecutableName, process, result);
-						}
-						else if (application.AutoTerminate && !TryTerminate(process))
-						{
-							AddFailed(application.ExecutableName, process, result);
-						}
-
-						break;
-					}
-				}
-			}
 		}
 
 		private void InitializeWhitelist(ApplicationSettings settings, InitializationResult result)

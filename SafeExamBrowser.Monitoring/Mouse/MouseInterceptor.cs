@@ -31,7 +31,7 @@ namespace SafeExamBrowser.Monitoring.Mouse
 
 		public void Start()
 		{
-			hookId = nativeMethods.RegisterMouseHook(MouseHookCallback);
+			//hookId = nativeMethods.RegisterMouseHook(MouseHookCallback);
 		}
 
 		public void Stop()
@@ -45,10 +45,6 @@ namespace SafeExamBrowser.Monitoring.Mouse
 		private bool MouseHookCallback(MouseButton button, MouseButtonState state, MouseInformation info)
 		{
 			var block = false;
-
-			block |= button == MouseButton.Auxiliary;
-			block |= button == MouseButton.Middle && !settings.AllowMiddleButton;
-			block |= button == MouseButton.Right && !settings.AllowRightButton;
 
 			if (block)
 			{

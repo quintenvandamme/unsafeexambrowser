@@ -655,7 +655,7 @@
         Password Required
     </Entry>
     <Entry key="RuntimeWindow_ApplicationRunning">
-        SEB is running.
+        UnsafeExamBrowser is running.
     </Entry>
     <Entry key="ServerFailureDialog_Abort">
         Abort

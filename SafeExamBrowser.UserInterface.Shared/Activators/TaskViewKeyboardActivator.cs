@@ -65,7 +65,10 @@ namespace SafeExamBrowser.UserInterface.Shared.Activators
 		private bool IsActivation(Key key, KeyModifier modifier, KeyState state)
 		{
 			var changed = false;
+			// dit is een bool die aangeeft of de alt toets is ingedrukt.
+			// wanneer alt en tab zijn ingedrukt zal de taskview worden weer gegeven.
 			var pressed = state == KeyState.Pressed && modifier.HasFlag(KeyModifier.Alt);
+
 
 			switch (key)
 			{

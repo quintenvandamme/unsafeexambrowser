@@ -60,14 +60,10 @@ namespace SafeExamBrowser.Monitoring.Display
 
 		public void StartMonitoringDisplayChanges()
 		{
-			SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
-			logger.Info("Started monitoring display changes.");
 		}
 
 		public void StopMonitoringDisplayChanges()
 		{
-			SystemEvents.DisplaySettingsChanged -= SystemEvents_DisplaySettingsChanged;
-			logger.Info("Stopped monitoring display changes.");
 		}
 
 		public ValidationResult ValidateConfiguration(DisplaySettings settings)

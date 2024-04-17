@@ -112,6 +112,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeExamBrowser.Proctoring.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeExamBrowser.Applications.UnitTests", "SafeExamBrowser.Applications.UnitTests\SafeExamBrowser.Applications.UnitTests.csproj", "{FC6D80EC-8611-4287-87E2-17C028A10858}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "unsafe_installer", "unsafe_installer\unsafe_installer.vdproj", "{E9631DF6-DCD7-4FCD-8C9C-D0CBCC79E665}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -485,6 +487,12 @@ Global
 		{FC6D80EC-8611-4287-87E2-17C028A10858}.Debug|x86.Build.0 = Debug|x86
 		{FC6D80EC-8611-4287-87E2-17C028A10858}.Release|x64.ActiveCfg = Release|x64
 		{FC6D80EC-8611-4287-87E2-17C028A10858}.Release|x86.ActiveCfg = Release|x86
+		{E9631DF6-DCD7-4FCD-8C9C-D0CBCC79E665}.Debug|x64.ActiveCfg = Debug
+		{E9631DF6-DCD7-4FCD-8C9C-D0CBCC79E665}.Debug|x86.ActiveCfg = Debug
+		{E9631DF6-DCD7-4FCD-8C9C-D0CBCC79E665}.Release|x64.ActiveCfg = Release
+		{E9631DF6-DCD7-4FCD-8C9C-D0CBCC79E665}.Release|x64.Build.0 = Release
+		{E9631DF6-DCD7-4FCD-8C9C-D0CBCC79E665}.Release|x86.ActiveCfg = Release
+		{E9631DF6-DCD7-4FCD-8C9C-D0CBCC79E665}.Release|x86.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
