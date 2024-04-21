@@ -1,0 +1,30 @@
+name: Build installer
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: windows-2022
+
+    steps:
+      - name: Import certificate from the command-line
+        shell: pwsh
+        run: |
+          $Secure_String_Pwd = ConvertTo-SecureString "<password>" -AsPlainText -Force
+          Import-PfxCertificate -FilePath '${{github.workspace}}\<path>\project1_TemporaryKey.pfx' -CertStoreLocation Cert:\CurrentUser\My -Password $Secure_String_Pwd
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v1.1.3
+      - name: Set VS.net environment
+        run: cmd.exe /C CALL "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+      - name: Build VSTO
+        run: msbuild ${{github.workspace}}\yourproject.sln -t:rebuild /p:Platform="x64" /p:Configuration="Release" /nologo /nr:false /p:VisualStudioVersion="17.0"
+      - name: Setup VS Dev Environment
+        uses: seanmiddleditch/gha-setup-vsdevenv@v4
+      - name: Build installer
+        run: devenv.com ${{github.workspace}}\unsafe_installer\unsafe_installer.vdproj /build "Release|x64"
