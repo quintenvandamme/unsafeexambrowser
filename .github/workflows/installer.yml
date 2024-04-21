@@ -43,7 +43,7 @@ jobs:
       - name: Waiting for installer file in the background
         id: wait-for-msi
         run: |
-          $timeoutMinutes = 30
+          $timeoutMinutes = 10
           $startTime = Get-Date
           $msiFilePath = "./unsafe_installer/Release/unsafeexambrowser.msi"
   
