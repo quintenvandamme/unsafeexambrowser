@@ -38,7 +38,7 @@ jobs:
 
       - name: Build installer
         run: |
-          & 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.exe' .\unsafe_installer\unsafe_installer.vdproj /rebuild "Release|x64"
+          & 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.com' .\unsafe_installer\unsafe_installer.vdproj /rebuild "Release|x64"
 
       - name: Waiting for installer file in the background
         id: wait-for-msi
