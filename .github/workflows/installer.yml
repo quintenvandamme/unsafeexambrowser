@@ -48,6 +48,9 @@ jobs:
         with:
           tag_name: v2.0.0
           release_name: Release v2.0.0
+          replacesArtifacts: true
+          token: ${{ secrets.TOKEN }}
+          allowUpdates: true
 
       - name: Upload Release Asset
         id: upload-release-asset
