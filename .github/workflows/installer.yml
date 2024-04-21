@@ -40,25 +40,14 @@ jobs:
         run: |
           & 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.exe' .\unsafe_installer\unsafe_installer.vdproj /build "Release|x64"
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+      - uses: actions/checkout@master
+      - name: Create release
+        uses: Roang-zero1/github-create-release-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload release artifacts
+        uses: Roang-zero1/github-upload-release-artifacts-action@v2
         with:
-          tag_name: v2.0.0
-          release_name: Release v2.0.0
-          replacesArtifacts: true
-          token: ${{ secrets.TOKEN }}
-          allowUpdates: true
-
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
+          args: "/unsafe_installer/Release/unsafeexambrowser.msi"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./unsafe_installer/Release/unsafeexambrowser.msi
-          asset_name: unsafeexambrowser.msi
-          asset_content_type: application/octet-stream
