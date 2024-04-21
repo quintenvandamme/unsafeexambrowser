@@ -44,6 +44,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: unsafeexambrowser.msi
-          path: /unsafe_installer/Release/unsafeexambrowser.msi
+          path: ./unsafe_installer/Release/unsafeexambrowser.msi
           if-no-files-found: warn
           overwrite: true
