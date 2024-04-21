@@ -12,10 +12,12 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
@@ -41,9 +43,8 @@ jobs:
           & 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.com' .\unsafe_installer\unsafe_installer.vdproj /build "Release|x64"
 
       - name: Upload installer
-        uses: actions/upload-artifact@v4
+        uses: ncipollo/release-action@v1
         with:
-          name: unsafeexambrowser.msi
-          path: ./unsafe_installer/Release/unsafeexambrowser.msi
-          if-no-files-found: warn
-          overwrite: true
+          artifacts: "./unsafe_installer/Release/unsafeexambrowser.msi"
+          allowUpdates: true
+          tag: "2.0.0"
