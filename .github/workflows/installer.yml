@@ -33,7 +33,7 @@ jobs:
 
       - name: Build installer
         run: |
-          "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.exe" .\unsafe_installer\unsafe_installer.vdproj /build "Release|x64"
+          "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.exe" ".\unsafe_installer\unsafe_installer.vdproj" /build "Release|x64"
         working-directory: .\unsafe_installer
 
       - name: Create Release
