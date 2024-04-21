@@ -38,31 +38,7 @@ jobs:
 
       - name: Build installer
         run: |
-          & 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.com' .\unsafe_installer\unsafe_installer.vdproj /rebuild "Release|x64"
-
-      - name: Waiting for installer file in the background
-        id: wait-for-msi
-        run: |
-          $timeoutMinutes = 10
-          $startTime = Get-Date
-          $msiFilePath = "./unsafe_installer/Release/unsafeexambrowser.msi"
-  
-          while ((Get-Date) -lt ($startTime).AddMinutes($timeoutMinutes)) {
-            if (Test-Path $msiFilePath) {
-              Write-Host "::set-output name=msi_file_found::true"
-              break
-            }
-            Start-Sleep -Seconds 10  # Check every 10 seconds
-          }
-  
-      - name: Check if the installer is build
-        run: |
-          if ("${{ steps.wait-for-msi.outputs.msi_file_found }}" -eq "true") {
-            Write-Host "MSI file found!"
-          } else {
-            Write-Host "Timeout: MSI file not found within specified time."
-            exit 1
-          }
+          & 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.com' .\unsafe_installer\unsafe_installer.vdproj /build "Release|x64"
 
       - name: Upload installer
         uses: actions/upload-artifact@v4
