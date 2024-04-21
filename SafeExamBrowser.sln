@@ -102,10 +102,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeExamBrowser.Server", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeExamBrowser.Server.Contracts", "SafeExamBrowser.Server.Contracts\SafeExamBrowser.Server.Contracts.csproj", "{DB701E6F-BDDC-4CEC-B662-335A9DC11809}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Setup", "Setup\Setup.wixproj", "{0E14D163-557E-469E-9112-96936AF43A7B}"
-EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SetupBundle", "SetupBundle\SetupBundle.wixproj", "{95B68CBF-C483-4824-BB39-663E840519A0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeExamBrowser.Proctoring", "SafeExamBrowser.Proctoring\SafeExamBrowser.Proctoring.csproj", "{3F1F262E-A07C-4513-83C6-D7EF2F203EBF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeExamBrowser.Proctoring.Contracts", "SafeExamBrowser.Proctoring.Contracts\SafeExamBrowser.Proctoring.Contracts.csproj", "{8E52BD1C-0540-4F16-B181-6665D43F7A7B}"
