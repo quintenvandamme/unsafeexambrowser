@@ -29,7 +29,7 @@ jobs:
 
       - name: DisableOutOfProcBuild
         run: |
-          cmd.exe /C CALL "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\CommonExtensions\Microsoft\VSI\DisableOutOfProcBuild\DisableOutOfProcBuild.exe"
+          REG ADD HKCU\SOFTWARE\Microsoft\VisualStudio\15.0_2c79e3fe_Config\MSBuild /t REG_DWORD /v EnableOutOfProcBuild /d 0 /f
 
       - name: Build VSTO
         run: |
