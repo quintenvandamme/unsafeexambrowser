@@ -18,7 +18,7 @@ jobs:
       - name: Set VS.net environment
         run: cmd.exe /C CALL "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars64.bat"
       - name: Build VSTO
-        run: msbuild ${{github.workspace}} -t:rebuild /p:Platform="x64" /p:Configuration="Release" /nologo /nr:false /p:VisualStudioVersion="17.0"
+        run: msbuild .\ -t:rebuild /p:Platform="x64" /p:Configuration="Release" /nologo /nr:false /p:VisualStudioVersion="17.0"
       - name: Setup VS Dev Environment
         uses: seanmiddleditch/gha-setup-vsdevenv@v4
       - name: Build installer
