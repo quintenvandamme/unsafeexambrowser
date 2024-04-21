@@ -48,9 +48,9 @@ jobs:
 
       - name: Create leesmij.txt
         run: |
-          Set-Content ./unsafe_installer/Release/leemij.txt 'Installeer unsafeexambrowser.msi en VC_redist.x64.exe.`nHet maakt niet uit in welke volgorde.'
+          Set-Content ./unsafe_installer/Release/leemij.txt "Installeer unsafeexambrowser.msi en VC_redist.x64.exe.`nHet maakt niet uit in welke volgorde."
 
-      - name: Create leesmij.txt
+      - name: Remove setup.exe
         run: |
           Remove-Item ./unsafe_installer/Release/setup.exe
 
