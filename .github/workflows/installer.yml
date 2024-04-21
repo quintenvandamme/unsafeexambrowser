@@ -42,9 +42,21 @@ jobs:
         run: |
           & 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\IDE\devenv.com' .\unsafe_installer\unsafe_installer.vdproj /build "Release|x64"
 
+      - name: Download vc_redist
+        run: |
+          Invoke-WebRequest -OutFile ./unsafe_installer/Release/vc_redist.x64.exe https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+      - name: Create leesmij.txt
+        run: |
+          Set-Content ./unsafe_installer/Release/leemij.txt 'Installeer unsafeexambrowser.msi en VC_redist.x64.exe.\nHet maakt niet uit in welke volgorde.'
+
+      - name: Create Zip file
+        run: |
+          Compress-Archive -Path ./unsafe_installer/Release/* -DestinationPath ./unsafe_installer/Release/unsafeexambrowser.zip
+
       - name: Upload installer
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "./unsafe_installer/Release/unsafeexambrowser.msi"
+          artifacts: "./unsafe_installer/Release/unsafeexambrowser.zip"
           allowUpdates: true
           tag: "2.0.0"
