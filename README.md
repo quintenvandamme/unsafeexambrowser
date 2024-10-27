@@ -9,4 +9,4 @@
 
 ## Install
 1. Download and install [vc_redist.x64.exe](https://aka.ms/vs/17/release/vc_redist.x64.exe).
-2. Download and install [UNsafeExamBrowser]()
+2. Download and install [unsafeexambrowser](https://github.com/quintenvandamme/unsafeexambrowser/releases/download/2.0.0/unsafeexambrowser.msi)
