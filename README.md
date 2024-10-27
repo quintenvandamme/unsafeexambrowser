@@ -4,7 +4,7 @@
 - [x] Disable screen resizing check
 - [x] Disbale kiosk mode and allow multitasking
 - [x] Enable copy and paste
-- [x] Enable bookwidiget support
+- [x] Enable bookwidget support
 - [x] Override open sef file from browser to unsafeexambrowser
 
 ## Install
